@@ -1,8 +1,8 @@
 #include "Desk.h"
 
 Desk::Desk() :
-    m_cell_width{123.f},
-    m_cell_height{123.f}
+    m_cell_width{125},
+    m_cell_height{125}
 {}
 
 
@@ -17,12 +17,12 @@ void Desk::set_position() {
         {
             if (j % 2 == 0) {
                 m_board[i][j] = white;
-                m_board[i][j].move(x, y);
+                m_board[i][j].setPosition(x, y);
                 x += m_cell_height;
             }
             else {
                 m_board[i][j] = black;
-                m_board[i][j].move(x, y);
+                m_board[i][j].setPosition(x, y);
                 x += m_cell_height;
             }
         }

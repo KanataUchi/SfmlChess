@@ -5,11 +5,13 @@
 class King
 {
 	sf::Sprite m_sprite;
-	struct m_position {
+	struct position {
 		int x;
 		int y;
 	};
-	bool m_alive;
+	position m_position;
+	bool active_castle;
 	friend class Piece;
+	friend class Game;
 };
 
