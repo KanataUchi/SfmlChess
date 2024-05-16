@@ -14,7 +14,8 @@ void Game::game_loop() {
             if (m_event.type == sf::Event::Closed) {
                 m_window.close();
             }
-            king_desk_draw();
+            w_king_desk_draw();
+            b_king_desk();
             play();
         }
         m_window.display();
@@ -2777,7 +2778,7 @@ void Game::w_king_run() {
                                 }
                             }
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y - 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2802,10 +2803,10 @@ void Game::w_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y + 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2830,10 +2831,10 @@ void Game::w_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.x - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x - 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2858,10 +2859,10 @@ void Game::w_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.x + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x + 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2886,10 +2887,10 @@ void Game::w_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y - 1 > -1 and m_piece.m_king.at(i).m_position.x - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y - 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x - 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2914,10 +2915,10 @@ void Game::w_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y - 1 > -1 and m_piece.m_king.at(i).m_position.x + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y - 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x + 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2942,10 +2943,10 @@ void Game::w_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y + 1 < 8 and m_piece.m_king.at(i).m_position.x - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x -1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y + 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x - 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -2970,10 +2971,10 @@ void Game::w_king_run() {
                         }
                     }
                     if(m_piece.m_king.at(i).m_position.y + 1 < 8 and m_piece.m_king.at(i).m_position.x + 1 < 8){
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_w_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1]){
                             for (int j = 8; j < 16; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y + 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x + 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3123,10 +3124,10 @@ void Game::b_king_run() {
                 if (m_piece.m_king.at(i).m_sprite.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
                     reset_desk();
                     if (m_piece.m_king.at(i).m_position.y - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y - 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3151,10 +3152,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y + 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3179,10 +3180,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.x - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x - 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3207,10 +3208,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.x + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x + 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3235,10 +3236,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y - 1 > -1 and m_piece.m_king.at(i).m_position.x - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y - 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x - 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3263,10 +3264,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y - 1 > -1 and m_piece.m_king.at(i).m_position.x + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y - 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x + 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y - 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3291,10 +3292,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y + 1 < 8 and m_piece.m_king.at(i).m_position.x - 1 > -1) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y + 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x - 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x - 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3319,10 +3320,10 @@ void Game::b_king_run() {
                         }
                     }
                     if (m_piece.m_king.at(i).m_position.y + 1 < 8 and m_piece.m_king.at(i).m_position.x + 1 < 8) {
-                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1]) {
+                        if (m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1]) {
                             m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
                         }
-                        else {
+                        else if(!m_desk.m_is_open[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1] and m_desk.m_b_king_can[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1]){
                             for (int j = 0; j < 8; j++) {
                                 if (m_piece.m_pawn.at(j).m_position.y == m_piece.m_king.at(i).m_position.y + 1 and m_piece.m_pawn.at(j).m_position.x == m_piece.m_king.at(i).m_position.x + 1) {
                                     m_desk.m_board[m_piece.m_king.at(i).m_position.y + 1][m_piece.m_king.at(i).m_position.x + 1].setFillColor(sf::Color(7, 111, 28, 0));
@@ -3489,7 +3490,7 @@ void Game::isok() {
     }
 }
 
-void Game::king_desk() {
+void Game::w_king_desk() {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             m_desk.m_w_king_can[i][j] = 1;
@@ -3511,12 +3512,12 @@ void Game::king_desk() {
     for (int i = 2; i < 4; i++){
         for (int j = m_piece.m_rook.at(i).m_position.x + 1; j < 8; j++) {
             if (!m_desk.m_is_open[m_piece.m_rook.at(i).m_position.y][j]) {
-                for (int z = 0; z < 8; z++) {
+                for (int z = 0; z < 16; z++) {
                     if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
                 }
-                for (int z = 0; z < 2; z++) {
+                for (int z = 0; z < 4; z++) {
                     if (m_piece.m_rook.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
@@ -3527,7 +3528,7 @@ void Game::king_desk() {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
                 }
-                for (int z = 0; z < 1; z++) {
+                for (int z = 0; z < 2; z++) {
                     if (m_piece.m_queen.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
@@ -3538,12 +3539,12 @@ void Game::king_desk() {
         }
         for (int j = m_piece.m_rook.at(i).m_position.x - 1; j > -1; j--) {
             if (!m_desk.m_is_open[m_piece.m_rook.at(i).m_position.y][j]) {
-                for (int z = 0; z < 8; z++) {
+                for (int z = 0; z < 16; z++) {
                     if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
                 }
-                for (int z = 0; z < 2; z++) {
+                for (int z = 0; z < 4; z++) {
                     if (m_piece.m_rook.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
@@ -3554,7 +3555,7 @@ void Game::king_desk() {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
                 }
-                for (int z = 0; z < 1; z++) {
+                for (int z = 0; z < 2; z++) {
                     if (m_piece.m_queen.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
                         m_desk.m_w_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
                     }
@@ -3565,12 +3566,12 @@ void Game::king_desk() {
         }
         for (int j = m_piece.m_rook.at(i).m_position.y + 1; j < 8; j++) {
             if (!m_desk.m_is_open[j][m_piece.m_rook.at(i).m_position.x]) {
-                for (int z = 0; z < 8; z++) {
+                for (int z = 0; z < 16; z++) {
                     if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
                 }
-                for (int z = 0; z < 2; z++) {
+                for (int z = 0; z < 4; z++) {
                     if (m_piece.m_rook.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
@@ -3581,7 +3582,7 @@ void Game::king_desk() {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
                 }
-                for (int z = 0; z < 1; z++) {
+                for (int z = 0; z < 2; z++) {
                     if (m_piece.m_queen.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
@@ -3592,12 +3593,12 @@ void Game::king_desk() {
         }
         for (int j = m_piece.m_rook.at(i).m_position.y - 1; j > -1; j--) {
             if (!m_desk.m_is_open[j][m_piece.m_rook.at(i).m_position.x]) {
-                for (int z = 0; z < 8; z++) {
+                for (int z = 0; z < 16; z++) {
                     if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
                 }
-                for (int z = 0; z < 2; z++) {
+                for (int z = 0; z < 4; z++) {
                     if (m_piece.m_rook.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
@@ -3608,7 +3609,7 @@ void Game::king_desk() {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
                 }
-                for (int z = 0; z < 1; z++) {
+                for (int z = 0; z < 2; z++) {
                     if (m_piece.m_queen.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
                         m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
                     }
@@ -3643,11 +3644,826 @@ void Game::king_desk() {
         if (m_piece.m_knight.at(i).m_position.y - 1 > -1 and m_piece.m_knight.at(i).m_position.x - 2 < -1) {
             m_desk.m_w_king_can[m_piece.m_knight.at(i).m_position.y - 1][m_piece.m_knight.at(i).m_position.x - 2] = 0;
         }
+        //////
+        for (int j = m_piece.m_bishop.at(i).m_position.y + 1, z = m_piece.m_bishop.at(i).m_position.x + 1; j < 8 and z < 8; j++, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_bishop.at(i).m_position.y + 1, z = m_piece.m_bishop.at(i).m_position.x - 1; j < 8 and z > -1; j++, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_bishop.at(i).m_position.y - 1, z = m_piece.m_bishop.at(i).m_position.x + 1; j > -1 and z < 8; j--, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_bishop.at(i).m_position.y - 1, z = m_piece.m_bishop.at(i).m_position.x - 1; j > -1 and z > -1; j--, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+    }
+    //////////
+    for (int i = 1; i < 2; i++){
+        for (int j = m_piece.m_queen.at(i).m_position.x + 1; j < 8; j++) {
+            if (!m_desk.m_is_open[m_piece.m_queen.at(i).m_position.y][j]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_knight.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_bishop.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.x - 1; j > -1; j--) {
+            if (!m_desk.m_is_open[m_piece.m_queen.at(i).m_position.y][j]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_knight.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_bishop.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y + 1; j < 8; j++) {
+            if (!m_desk.m_is_open[j][m_piece.m_queen.at(i).m_position.x]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[j][m_piece.m_queen.at(i).m_position.x] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_knight.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_bishop.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y - 1; j > -1; j--) {
+            if (!m_desk.m_is_open[j][m_piece.m_queen.at(i).m_position.x]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_knight.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_bishop.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
+                        m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        //////
+        for (int j = m_piece.m_queen.at(i).m_position.y + 1, z = m_piece.m_queen.at(i).m_position.x + 1; j < 8 and z < 8; j++, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y + 1, z = m_piece.m_queen.at(i).m_position.x - 1; j < 8 and z > -1; j++, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y - 1, z = m_piece.m_queen.at(i).m_position.x + 1; j > -1 and z < 8; j--, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y - 1, z = m_piece.m_queen.at(i).m_position.x - 1; j > -1 and z > -1; j--, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_w_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][z] = 0;
+        }
     }
 }
 
-void Game::king_desk_draw() {
-    king_desk();
+void Game::b_king_desk() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            m_desk.m_b_king_can[i][j] = 1;
+        }
+    }
+
+    for (int i = 0; i < 8; i++) {
+        if (m_piece.m_pawn.at(i).m_position.x + 1 < 8 and m_piece.m_pawn.at(i).m_position.x - 1 > -1) {
+            m_desk.m_b_king_can[m_piece.m_pawn.at(i).m_position.y + 1][m_piece.m_pawn.at(i).m_position.x + 1] = 0;
+            m_desk.m_b_king_can[m_piece.m_pawn.at(i).m_position.y + 1][m_piece.m_pawn.at(i).m_position.x - 1] = 0;
+        }
+        if (m_piece.m_pawn.at(i).m_position.x + 1 < 8) {
+            m_desk.m_b_king_can[m_piece.m_pawn.at(i).m_position.y + 1][m_piece.m_pawn.at(i).m_position.x + 1] = 0;
+        }
+        if (m_piece.m_pawn.at(i).m_position.x - 1 > -1) {
+            m_desk.m_b_king_can[m_piece.m_pawn.at(i).m_position.y + 1][m_piece.m_pawn.at(i).m_position.x - 1] = 0;
+        }
+    }
+    for (int i = 0; i < 2; i++) {
+        for (int j = m_piece.m_rook.at(i).m_position.x + 1; j < 8; j++) {
+            if (!m_desk.m_is_open[m_piece.m_rook.at(i).m_position.y][j]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_knight.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_bishop.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_rook.at(i).m_position.x - 1; j > -1; j--) {
+            if (!m_desk.m_is_open[m_piece.m_rook.at(i).m_position.y][j]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_knight.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_bishop.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.y == m_piece.m_rook.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[m_piece.m_rook.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_rook.at(i).m_position.y + 1; j < 8; j++) {
+            if (!m_desk.m_is_open[j][m_piece.m_rook.at(i).m_position.x]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_knight.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_bishop.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+        }
+        for (int j = m_piece.m_rook.at(i).m_position.y - 1; j > -1; j--) {
+            if (!m_desk.m_is_open[j][m_piece.m_rook.at(i).m_position.x]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_knight.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_bishop.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.x == m_piece.m_rook.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_w_king_can[j][m_piece.m_rook.at(i).m_position.x] = 0;
+        }
+        ///////////
+        if (m_piece.m_knight.at(i).m_position.y + 2 < 8 and m_piece.m_knight.at(i).m_position.x + 1 < 8) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y + 2][m_piece.m_knight.at(i).m_position.x + 1] = 0;
+        }
+        if (m_piece.m_knight.at(i).m_position.y + 2 < 8 and m_piece.m_knight.at(i).m_position.x - 1 > -1) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y + 2][m_piece.m_knight.at(i).m_position.x - 1] = 0;
+        }
+        if (m_piece.m_knight.at(i).m_position.y - 2 > -1 and m_piece.m_knight.at(i).m_position.x + 1 < 8) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y - 2][m_piece.m_knight.at(i).m_position.x + 1] = 0;
+        }
+        if (m_piece.m_knight.at(i).m_position.y - 2 > -1 and m_piece.m_knight.at(i).m_position.x - 1 > -1) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y - 2][m_piece.m_knight.at(i).m_position.x - 1] = 0;
+        }
+
+        if (m_piece.m_knight.at(i).m_position.y + 1 < 8 and m_piece.m_knight.at(i).m_position.x + 2 < 8) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y + 1][m_piece.m_knight.at(i).m_position.x + 2] = 0;
+        }
+        if (m_piece.m_knight.at(i).m_position.y + 1 < 8 and m_piece.m_knight.at(i).m_position.x - 2 > -1) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y + 1][m_piece.m_knight.at(i).m_position.x - 2] = 0;
+        }
+        if (m_piece.m_knight.at(i).m_position.y - 1 > -1 and m_piece.m_knight.at(i).m_position.x + 2 < 8) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y - 1][m_piece.m_knight.at(i).m_position.x + 2] = 0;
+        }
+        if (m_piece.m_knight.at(i).m_position.y - 1 > -1 and m_piece.m_knight.at(i).m_position.x - 2 < -1) {
+            m_desk.m_b_king_can[m_piece.m_knight.at(i).m_position.y - 1][m_piece.m_knight.at(i).m_position.x - 2] = 0;
+        }
+        //////
+        for (int j = m_piece.m_bishop.at(i).m_position.y + 1, z = m_piece.m_bishop.at(i).m_position.x + 1; j < 8 and z < 8; j++, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 8; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 1; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_bishop.at(i).m_position.y + 1, z = m_piece.m_bishop.at(i).m_position.x - 1; j < 8 and z > -1; j++, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_bishop.at(i).m_position.y - 1, z = m_piece.m_bishop.at(i).m_position.x + 1; j > -1 and z < 8; j--, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_bishop.at(i).m_position.y - 1, z = m_piece.m_bishop.at(i).m_position.x - 1; j > -1 and z > -1; j--, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+    }
+    //////////
+    for (int i = 0; i < 1; i++) {
+        for (int j = m_piece.m_queen.at(i).m_position.x + 1; j < 8; j++) {
+            if (!m_desk.m_is_open[m_piece.m_queen.at(i).m_position.y][j]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_knight.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_bishop.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.x - 1; j > -1; j--) {
+            if (!m_desk.m_is_open[m_piece.m_queen.at(i).m_position.y][j]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_pawn.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_rook.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_knight.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_bishop.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.y == m_piece.m_queen.at(i).m_position.y and m_piece.m_queen.at(z).m_position.x == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y + 1; j < 8; j++) {
+            if (!m_desk.m_is_open[j][m_piece.m_queen.at(i).m_position.x]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[j][m_piece.m_queen.at(i).m_position.x] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_knight.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_bishop.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y - 1; j > -1; j--) {
+            if (!m_desk.m_is_open[j][m_piece.m_queen.at(i).m_position.x]) {
+                for (int z = 0; z < 16; z++) {
+                    if (m_piece.m_pawn.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_pawn.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 4; z++) {
+                    if (m_piece.m_rook.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_rook.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_knight.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_knight.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                    if (m_piece.m_bishop.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_bishop.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                for (int z = 0; z < 2; z++) {
+                    if (m_piece.m_queen.at(z).m_position.x == m_piece.m_queen.at(i).m_position.x and m_piece.m_queen.at(z).m_position.y == j) {
+                        m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[m_piece.m_queen.at(i).m_position.y][j] = 0;
+        }
+        //////
+        for (int j = m_piece.m_queen.at(i).m_position.y + 1, z = m_piece.m_queen.at(i).m_position.x + 1; j < 8 and z < 8; j++, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y + 1, z = m_piece.m_queen.at(i).m_position.x - 1; j < 8 and z > -1; j++, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y - 1, z = m_piece.m_queen.at(i).m_position.x + 1; j > -1 and z < 8; j--, z++) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+        for (int j = m_piece.m_queen.at(i).m_position.y - 1, z = m_piece.m_queen.at(i).m_position.x - 1; j > -1 and z > -1; j--, z--) {
+            if (!m_desk.m_is_open[j][z]) {
+                for (int f = 0; f < 16; f++) {
+                    if (m_piece.m_pawn.at(f).m_position.y == j and m_piece.m_pawn.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 4; f++) {
+                    if (m_piece.m_rook.at(f).m_position.y == j and m_piece.m_rook.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_knight.at(f).m_position.y == j and m_piece.m_knight.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                    if (m_piece.m_bishop.at(f).m_position.y == j and m_piece.m_bishop.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                for (int f = 0; f < 2; f++) {
+                    if (m_piece.m_queen.at(f).m_position.y == j and m_piece.m_queen.at(f).m_position.x == z) {
+                        m_desk.m_b_king_can[j][z] = 0;
+                    }
+                }
+                break;
+            }
+            m_desk.m_b_king_can[j][z] = 0;
+        }
+    }
+}
+
+void Game::w_king_desk_draw() {
+    w_king_desk();
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             std::cout << m_desk.m_w_king_can[i][j] << " ";

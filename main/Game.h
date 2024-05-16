@@ -53,8 +53,8 @@ public:
 	void b_queen_run();
 	void w_king_run();
 	void b_king_run();
-	bool king_can();
-	void king_desk();
-	void king_desk_draw();
+	void w_king_desk();
+	void w_king_desk_draw();
+	void b_king_desk();
 };
 
