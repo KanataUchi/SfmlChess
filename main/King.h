@@ -10,7 +10,8 @@ class King
 		int y;
 	};
 	position m_position;
-	bool active_castle;
+	bool w_first[1];
+	bool b_first[1];
 	friend class Piece;
 	friend class Game;
 };

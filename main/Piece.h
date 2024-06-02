@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include <array>
 #include <string>
 
@@ -14,12 +15,18 @@
 #include "Desk.h"
 
 class Piece{
-	std::array<Pawn,16> m_pawn;
-	std::array <Rook, 4> m_rook;
-	std::array <Knight, 4> m_knight;
-	std::array <Bishop, 4> m_bishop;
-	std::array <Queen, 2> m_queen;
-	std::array <King, 2> m_king;
+	std::vector <Pawn> m_w_pawn;
+	std::vector <Pawn> m_b_pawn;
+	std::vector <Rook> m_w_rook;
+	std::vector <Rook> m_b_rook;
+	std::vector <Knight> m_w_knight;
+	std::vector <Knight> m_b_knight;
+	std::vector <Bishop> m_w_bishop;
+	std::vector <Bishop> m_b_bishop;
+	std::vector <Queen> m_w_queen;
+	std::vector <Queen> m_b_queen;
+	std::vector <King> m_w_king;
+	std::vector <King> m_b_king;
 
 	std::array<sf::Texture, 12> m_textures;
 
@@ -27,6 +34,7 @@ class Piece{
 public:
 	void init_piece();
 	void set_pos();
+	void vectorsize();
 
 	friend class Game;
 };

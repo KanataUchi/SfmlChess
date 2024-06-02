@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include <cmath>
 
 #include "Piece.h"
@@ -18,25 +19,47 @@
 
 class Game{
 	sf::RenderWindow m_window;
+	sf::RenderWindow m_window_extra;
 	sf::Event m_event;
-	bool pawn_run[16]{};
-	bool rook_run[4]{};
-	bool knight_run[4]{};
-	bool bishop_run[4]{};
-	bool queen_run[2]{};
-	bool king_run[2]{};
 	bool queue = true;
+	bool check = false;
+	bool w_draw;
+	bool b_draw;
+	bool open = true;
+	bool w_can = false;
+	
+
+	std::vector <bool> m_w_pawn_run;
+	std::vector <bool> m_b_pawn_run;
+	std::vector <bool> m_w_rook_run;
+	std::vector <bool> m_b_rook_run;
+	std::vector <bool> m_w_knight_run;
+	std::vector <bool> m_b_knight_run;
+	std::vector <bool> m_w_bishop_run;
+	std::vector <bool> m_b_bishop_run;
+	std::vector <bool> m_w_queen_run;
+	std::vector <bool> m_b_queen_run;
+	std::vector <bool> m_w_king_run;
+	std::vector <bool> m_b_king_run;
 
 	Desk  m_desk;
 	Piece m_piece;
 
+
+
 public:
+	int restart;
+	void main_menu();
+
 	void run();
-	void init_systems();
+	void init_systems(int x,int y);
+	void window(int x, int y);
 	void game_loop();
+	void reference();
 	void draw_desk();
 	void draw_piece();
 	void reset_desk();
+	void can_run();
 
 	void play();
 
@@ -56,5 +79,16 @@ public:
 	void w_king_desk();
 	void w_king_desk_draw();
 	void b_king_desk();
+
+	void w_check();
+	void b_check();
+	void w_is_life();
+	void b_is_life();
+    void w_checkmate();
+	void b_checkmate();
+	void draw();
+
+	int w_appear();
+	int b_appear();
 };
 

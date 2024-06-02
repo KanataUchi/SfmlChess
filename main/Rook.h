@@ -10,7 +10,8 @@ class Rook
 		int y;
 	};
 	position m_position;
-	bool castling[4]{};
+	bool w_castling[2];
+	bool b_castling[2];
 
 	friend class Piece;
 	friend class Game;

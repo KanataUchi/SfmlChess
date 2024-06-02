@@ -131,16 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Desk.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="King.cpp" />
-    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Piece.cpp" />
-    <ClCompile Include="Queen.cpp" />
-    <ClCompile Include="Rook.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll" />
